@@ -1,0 +1,858 @@
+/* ═══════════════════════════════════════════════════════════════
+   فوتر آرام، دلباز و دوستانه بندرِ داکر (Docker Harbor Cozy & Calm Footer)
+   حس و حال آرامش‌بخش، فضای تنفس باز، المان‌های نرم، دوستانه و کیوت
+   ═══════════════════════════════════════════════════════════════ */
+
+.bnd-footer {
+  position: relative;
+  background: #0b1424;
+  color: #94a3b8;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.1);
+  margin-top: 96px;
+  overflow: visible;
+  font-family: inherit;
+  width: 100%;
+}
+
+/* بافت پس‌زمینه شب ساحلی با هاله‌های نرم */
+.bnd-footer-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1000px 320px at 50% 0%, rgba(56, 189, 248, 0.08), transparent 70%),
+    radial-gradient(600px 300px at 10% 100%, rgba(52, 211, 153, 0.04), transparent 60%),
+    radial-gradient(600px 300px at 90% 100%, rgba(251, 191, 36, 0.04), transparent 60%),
+    radial-gradient(rgba(255, 255, 255, 0.025) 1.2px, transparent 1.2px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
+}
+
+/* نوار رنگی ملایم بالای فوتر (رنگ‌های پاستلی و نرم) */
+.bnd-footer-strip {
+  display: flex;
+  height: 4px;
+  width: 100%;
+  opacity: 0.85;
+}
+
+.bnd-footer-strip i {
+  flex: 1;
+}
+
+.bnd-footer-strip i:nth-child(1) { background: #38bdf8; }
+.bnd-footer-strip i:nth-child(2) { background: #34d399; }
+.bnd-footer-strip i:nth-child(3) { background: #fbbf24; }
+.bnd-footer-strip i:nth-child(4) { background: #fb7185; }
+.bnd-footer-strip i:nth-child(5) { background: #a78bfa; }
+.bnd-footer-strip i:nth-child(6) { background: #22d3ee; }
+
+/* ═══════════════════════════════════════════════════════════════
+   صحنه آرام و بامزه ساحلی: نهنگ داکر و قایق مهربان روی آب
+   ═══════════════════════════════════════════════════════════════ */
+.bnd-calm-stage {
+  position: absolute;
+  top: -46px;
+  left: 0;
+  right: 0;
+  height: 46px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 44px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* کاروان کانتینرهای کوچک و ملایم در سمت راست */
+.bnd-calm-boxes {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.bnd-mini-box {
+  border-radius: 5px;
+  border: 1.5px solid var(--ink);
+  box-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.bnd-mini-box:hover {
+  transform: translateY(-5px);
+}
+
+.bnd-mb-1 { width: 28px; height: 16px; background: #38bdf8; }
+.bnd-mb-2 { width: 24px; height: 22px; background: #fbbf24; }
+.bnd-mb-3 { width: 30px; height: 14px; background: #34d399; }
+
+/* نهنگ مهربان داکر در مرکز (Cute Floating Whale) */
+.bnd-cute-whale {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: bndWhaleBob 6s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.bnd-cute-whale:hover {
+  transform: scale(1.08);
+}
+
+.bnd-whale-spout {
+  position: absolute;
+  top: -14px;
+  width: 4px;
+  height: 12px;
+  background: #38bdf8;
+  border-radius: 3px;
+  opacity: 0.8;
+  animation: bndSpoutFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes bndSpoutFloat {
+  0%, 100% { height: 10px; opacity: 0.6; }
+  50% { height: 15px; opacity: 1; }
+}
+
+.bnd-whale-body {
+  width: 54px;
+  height: 24px;
+  background: #2563eb;
+  border: 2px solid var(--ink);
+  border-radius: 12px 18px 24px 20px;
+  position: relative;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+}
+
+.bnd-whale-eye {
+  position: absolute;
+  top: 7px;
+  left: 12px;
+  width: 5px;
+  height: 5px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.bnd-whale-eye::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 3px;
+  height: 3px;
+  background: var(--ink);
+  border-radius: 50%;
+}
+
+.bnd-whale-boxes {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  display: flex;
+  gap: 2px;
+}
+
+.bnd-whale-box {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  border: 1px solid var(--ink);
+}
+
+.bnd-wb-1 { background: #fb7185; }
+.bnd-wb-2 { background: #fbbf24; }
+.bnd-wb-3 { background: #34d399; }
+
+/* حباب دیالوگ بامزه نهنگ */
+.bnd-cute-bubble {
+  position: absolute;
+  bottom: 34px;
+  white-space: nowrap;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  box-shadow: 2px 2px 0 var(--ink);
+  animation: bndPop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 20;
+}
+
+@keyframes bndPop {
+  from { opacity: 0; transform: scale(0.6) translateY(5px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes bndWhaleBob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1.5deg); }
+}
+
+/* قایق کوچک در سمت چپ */
+.bnd-calm-boat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: bndBoatFloat 5s ease-in-out infinite 0.5s;
+}
+
+.bnd-calm-boat:hover {
+  transform: scale(1.1);
+}
+
+.bnd-cboat-hull {
+  width: 48px;
+  height: 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px 3px 12px 12px;
+  box-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bnd-cboat-box {
+  width: 14px;
+  height: 8px;
+  background: #fb7185;
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+  margin-bottom: 1px;
+}
+
+@keyframes bndBoatFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1.5deg); }
+}
+
+/* امواج ملایم دریا */
+.bnd-footer-waves {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bnd-gentle-wave {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 80px;
+  border-radius: 45%;
+  border-top: 1.5px solid rgba(125, 211, 252, 0.12);
+}
+
+.bnd-wave-1 {
+  top: 72px;
+  animation: bndWaveSoft 16s ease-in-out infinite;
+}
+
+.bnd-wave-2 {
+  top: 98px;
+  border-top-color: rgba(125, 211, 252, 0.06);
+  animation: bndWaveSoft 20s ease-in-out infinite reverse;
+}
+
+@keyframes bndWaveSoft {
+  50% { transform: translateX(24px); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   محتوای اصلی فوتر: تمیز، دلباز و با آرامش بصری
+   ═══════════════════════════════════════════════════════════════ */
+.bnd-footer-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 64px 44px 36px;
+}
+
+/* شبکه ۴ ستونه خلوت با فاصله‌های راحت */
+.bnd-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── ستون ۱: برند و پیام صمیمی ── */
+.bnd-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bnd-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.bnd-brand-cube {
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  gap: 3px;
+  padding: 6px;
+  background: var(--blue);
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bnd-brand-col:hover .bnd-brand-cube {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.bnd-brand-cube i {
+  height: 10px;
+  background: #ffffff;
+  border-radius: 2px;
+  display: block;
+}
+
+.bnd-brand-cube i:nth-child(2) { background: #fbbf24; }
+.bnd-brand-cube i:nth-child(3) { background: #34d399; }
+
+.bnd-brand-names strong {
+  font-size: 21px;
+  font-weight: 900;
+  color: #ffffff;
+  display: block;
+  line-height: 1.2;
+}
+
+.bnd-brand-names small {
+  font-size: 11px;
+  font-weight: 700;
+  color: #7e93ac;
+  letter-spacing: 0.6px;
+}
+
+.bnd-brand-desc {
+  font-size: 14px;
+  line-height: 2.05;
+  color: #8da2b8;
+  margin: 0;
+}
+
+/* نشانگر ملایم وضعیت شبیه‌ساز */
+.bnd-calm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #cbd5e1;
+  width: fit-content;
+}
+
+.bnd-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  flex-shrink: 0;
+}
+
+/* ── ستون‌های ۲ و ۳: سرفصل‌ها و ابزارها (مینیمال، شفاف و با تنفس باز) ── */
+.bnd-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bnd-col-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+}
+
+.bnd-col-title svg {
+  color: #38bdf8;
+}
+
+.bnd-col-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 99px;
+  padding: 1px 8px;
+}
+
+.bnd-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* لینک ماژول‌های دوره */
+.bnd-module-btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #b0c2d6;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.18s ease;
+}
+
+.bnd-module-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+.bnd-mod-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--mc, #38bdf8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: all 0.18s;
+}
+
+.bnd-module-btn:hover .bnd-mod-num {
+  background: var(--mc, #38bdf8);
+  color: #ffffff;
+  border-color: var(--mc, #38bdf8);
+}
+
+.bnd-mod-text {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bnd-mod-arrow {
+  opacity: 0;
+  color: #38bdf8;
+  transform: translateX(4px);
+  transition: all 0.18s;
+  flex-shrink: 0;
+}
+
+.bnd-module-btn:hover .bnd-mod-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* لینک‌های ابزارها و مراجع */
+.bnd-tool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #b0c2d6;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  width: auto;
+  justify-content: flex-start;
+  text-align: right;
+  transition: all 0.18s ease;
+}
+
+.bnd-tool-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+.bnd-tool-icon {
+  color: #64748b;
+  flex-shrink: 0;
+  transition: color 0.18s;
+}
+
+.bnd-tool-link:hover .bnd-tool-icon {
+  color: #38bdf8;
+}
+
+.bnd-tool-title {
+  flex-grow: 0;
+  text-align: right;
+}
+
+.bnd-soft-pill {
+  font-size: 10px;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 99px;
+  padding: 1px 7px;
+  margin-inline-start: auto;
+}
+
+/* ── ستون ۴: کارت پیشرفت نرم و دلنشین (Cozy Progress Card) ── */
+.bnd-progress-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(17, 28, 46, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 20px 22px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.bnd-progress-card:hover {
+  border-color: rgba(56, 189, 248, 0.25);
+  box-shadow: 0 14px 34px -10px rgba(29, 99, 237, 0.15);
+}
+
+.bnd-pcard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bnd-donut-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+/* دونات نرم پیشرفت */
+.bnd-donut {
+  --p: 0%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: conic-gradient(#10b981 var(--p), rgba(255, 255, 255, 0.08) 0);
+  transition: background 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bnd-donut::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: #0f1c2e;
+}
+
+.bnd-donut b {
+  position: relative;
+  font-size: 13px;
+  font-weight: 900;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.bnd-pcard-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bnd-pcard-copy b {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.bnd-pcard-copy small {
+  font-size: 11px;
+  color: #7e93ac;
+  font-weight: 600;
+}
+
+.bnd-pcard-next {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.bnd-pcard-next span {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 1px;
+}
+
+.bnd-pcard-next strong {
+  color: #ffffff;
+  font-weight: 700;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* دکمه اکشن آرام و دلنشین */
+.bnd-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fa5238, #f43f5e);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 11px 18px;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(250, 82, 56, 0.3);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+}
+
+.bnd-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(250, 82, 56, 0.4);
+}
+
+.bnd-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* چیپ دستور کپی‌شونده آرام در زیر کارت */
+.bnd-quick-cmd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #0d1624;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 6px 8px 6px 12px;
+  font-family: var(--mono);
+}
+
+.bnd-qcmd-text {
+  color: #cbd5e1;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.bnd-qcmd-copy {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.bnd-qcmd-copy:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.bnd-qcmd-copy.copied {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.bnd-qcmd-label {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   نوار پایانی آرام (Sub-footer)
+   ═══════════════════════════════════════════════════════════════ */
+.bnd-footer-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.bnd-bottom-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bnd-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bnd-heart {
+  color: #fb7185;
+  font-style: normal;
+  font-size: 13px;
+  display: inline-block;
+  animation: bndHeartSoft 2s ease-in-out infinite;
+}
+
+@keyframes bndHeartSoft {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(1); }
+}
+
+/* دکمه بازگشت به بالا آرام */
+.bnd-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  border-radius: 11px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bnd-top-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.bnd-top-btn svg {
+  transition: transform 0.2s;
+}
+
+.bnd-top-btn:hover svg {
+  transform: translateY(-2px);
+  color: #38bdf8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   واکنش‌گرایی (Responsive)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1140px) {
+  .bnd-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 32px;
+  }
+}
+
+@media (max-width: 680px) {
+  .bnd-footer {
+    margin-top: 72px;
+  }
+  .bnd-calm-stage {
+    top: -38px;
+    height: 38px;
+    padding: 0 16px;
+  }
+  .bnd-calm-boxes {
+    display: none;
+  }
+  .bnd-footer-inner {
+    padding: 52px 20px 24px;
+  }
+  .bnd-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 28px;
+  }
+  .bnd-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .bnd-top-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bnd-cute-whale,
+  .bnd-calm-boat,
+  .bnd-wave-1,
+  .bnd-wave-2,
+  .bnd-heart,
+  .bnd-whale-spout {
+    animation: none !important;
+    transition: none !important;
+  }
+}
