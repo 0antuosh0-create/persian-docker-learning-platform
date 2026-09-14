@@ -132,6 +132,8 @@ export function LessonPlayer({
   const [visible, setVisible] = useState(1);
   const [solved, setSolved] = useState<boolean[]>(() => lesson.steps.map(() => false));
   const [finished, setFinished] = useState(false);
+  const [activeReadingStep, setActiveReadingStep] = useState(0);
+  const [showMobileTimeline, setShowMobileTimeline] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
@@ -141,6 +143,8 @@ export function LessonPlayer({
     setVisible(1);
     setSolved(lesson.steps.map(() => false));
     setFinished(false);
+    setActiveReadingStep(0);
+    setShowMobileTimeline(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [lessonId, lesson.steps]);
 
@@ -157,6 +161,38 @@ export function LessonPlayer({
       return () => clearTimeout(t);
     }
   }, [finished]);
+  /* رصد موقعیت اسکرول (Scroll Spy) برای هایلایت خودکار گام در حال مطالعه */
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const triggerPoint = scrollY + 220;
+
+      if (summaryRef.current) {
+        const summaryTop = summaryRef.current.getBoundingClientRect().top + scrollY;
+        if (triggerPoint >= summaryTop - 40) {
+          setActiveReadingStep(total);
+          return;
+        }
+      }
+
+      const stepElements = Array.from(document.querySelectorAll<HTMLElement>("[data-step]"));
+      let currentIdx = 0;
+      for (let i = 0; i < stepElements.length; i++) {
+        const el = stepElements[i];
+        const top = el.getBoundingClientRect().top + scrollY;
+        if (top <= triggerPoint) {
+          currentIdx = i;
+        } else {
+          break;
+        }
+      }
+      setActiveReadingStep(currentIdx);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [visible, finished, total]);
 
   const currentIndex = visible - 1;
   const current = lesson.steps[currentIndex];
@@ -217,10 +253,24 @@ export function LessonPlayer({
   };
 
   const jumpTo = (index: number) => {
+    if (index >= visible && !finished) {
+      if (gateOpen && index === visible) {
+        setVisible(index + 1);
+      } else {
+        return;
+      }
+    }
     const el = document.querySelector(`[data-step="${index}"]`);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setShowMobileTimeline(false);
   };
 
+  const jumpToRecap = () => {
+    summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setShowMobileTimeline(false);
+  };
   /* متن دکمه پیشروی بر اساس مرحله بعدی */
   const continueLabel = () => {
     if (visible >= total) return { text: "ثبت درس و مشاهده جمع‌بندی", icon: <Bookmark size={18} /> };
@@ -291,21 +341,29 @@ export function LessonPlayer({
       <div className="player-layout">
         {/* فهرست گام‌های درس */}
         <aside className="outline-rail" aria-label="فهرست گام‌های درس">
-          <div className="outline-title">ساختار درس</div>
+          <div className="outline-title">
+            <span>ساختار درس</span>
+            <span className="outline-counter">{fa(Math.min(activeReadingStep + 1, total))}/{fa(total)}</span>
+          </div>
           <ol>
             {lesson.steps.map((step, i) => {
               const meta = STEP_META[step.kind];
               const Icon = meta.icon;
-              const state = finished || i < visible - 1 ? "done" : i === currentIndex ? "current" : "pending";
+              const isDone = finished || i < visible - 1;
+              const isReading = activeReadingStep === i && !finished;
+              const isTarget = i === currentIndex && !finished;
+              const isLocked = i >= visible && !finished;
+
               return (
                 <li key={i}>
                   <button
-                    className={`outline-item ${state} ${step.kind === "try" ? "is-try" : ""} ${step.kind === "check" ? "is-check" : ""}`}
+                    className={`outline-item ${isDone ? "done" : ""} ${isReading ? "reading" : ""} ${isTarget ? "current" : ""} ${isLocked ? "pending" : ""} ${step.kind === "try" ? "is-try" : ""} ${step.kind === "check" ? "is-check" : ""}`}
                     onClick={() => jumpTo(i)}
-                    disabled={i >= visible && !finished}
+                    disabled={isLocked}
+                    title={`${meta.label}${isDone ? " (تکمیل شده)" : isReading ? " (در حال مطالعه)" : ""}`}
                   >
                     <span className="outline-icon">
-                      {state === "done" ? <CheckCircle2 size={14} /> : <Icon size={14} />}
+                      {isDone ? <CheckCircle2 size={14} /> : <Icon size={14} />}
                     </span>
                     <span className="outline-label">{meta.label}</span>
                   </button>
@@ -314,9 +372,10 @@ export function LessonPlayer({
             })}
             <li>
               <button
-                className={`outline-item recap ${finished ? "done" : "pending"}`}
+                className={`outline-item recap ${finished ? "done" : activeReadingStep >= total ? "reading" : "pending"}`}
                 disabled={!finished}
-                onClick={() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                onClick={jumpToRecap}
+                title="جمع‌بندی درس"
               >
                 <span className="outline-icon">{finished ? <CheckCircle2 size={14} /> : <Lock size={12} />}</span>
                 <span className="outline-label">جمع‌بندی</span>
@@ -480,6 +539,88 @@ export function LessonPlayer({
           <div ref={endRef} style={{ height: 1, scrollMarginTop: 90 }} />
         </main>
       </div>
+      {/* دکمه شناور موبایل برای ساختار درس */}
+      <div className="mobile-timeline-bar">
+        <button
+          type="button"
+          className="btn-mobile-timeline"
+          onClick={() => setShowMobileTimeline(true)}
+          aria-label="مشاهده ساختار درس"
+        >
+          <Layers size={15} />
+          <span>ساختار درس</span>
+          <bdi>{fa(Math.min(activeReadingStep + 1, total))}/{fa(total)}</bdi>
+        </button>
+      </div>
+
+      {/* دراور ساختار درس در موبایل */}
+      <AnimatePresence>
+        {showMobileTimeline && (
+          <div
+            className="mobile-timeline-backdrop"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setShowMobileTimeline(false);
+            }}
+          >
+            <motion.div
+              className="mobile-timeline-sheet"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="mts-head">
+                <div className="mts-title">
+                  <Layers size={16} />
+                  <strong>ساختار درس</strong>
+                  <span>{fa(Math.min(activeReadingStep + 1, total))} از {fa(total)}</span>
+                </div>
+                <button type="button" className="mts-close" onClick={() => setShowMobileTimeline(false)} aria-label="بستن">
+                  <X size={17} />
+                </button>
+              </div>
+
+              <div className="mts-body">
+                <ol className="mts-list">
+                  {lesson.steps.map((step, i) => {
+                    const meta = STEP_META[step.kind];
+                    const Icon = meta.icon;
+                    const isDone = finished || i < visible - 1;
+                    const isReading = activeReadingStep === i && !finished;
+                    const isLocked = i >= visible && !finished;
+
+                    return (
+                      <li key={i}>
+                        <button
+                          className={`mts-item ${isDone ? "done" : ""} ${isReading ? "reading" : ""} ${isLocked ? "pending" : ""}`}
+                          onClick={() => jumpTo(i)}
+                          disabled={isLocked}
+                        >
+                          <span className="mts-icon">
+                            {isDone ? <CheckCircle2 size={15} /> : <Icon size={15} />}
+                          </span>
+                          <span className="mts-label">{meta.label}</span>
+                          {isReading && <span className="mts-active-badge">در حال مطالعه</span>}
+                        </button>
+                      </li>
+                    );
+                  })}
+                  <li>
+                    <button
+                      className={`mts-item recap ${finished ? "done" : activeReadingStep >= total ? "reading" : "pending"}`}
+                      disabled={!finished}
+                      onClick={jumpToRecap}
+                    >
+                      <span className="mts-icon">{finished ? <CheckCircle2 size={15} /> : <Lock size={13} />}</span>
+                      <span className="mts-label">جمع‌بندی</span>
+                    </button>
+                  </li>
+                </ol>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
