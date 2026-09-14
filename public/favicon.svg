@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Base Background for High Visibility in Dark and Light Browser Tabs -->
+  <rect width="64" height="64" rx="16" fill="#0f1f33"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  
+  <!-- Container Blocks Stacked on Whale's Back -->
+  <!-- Top row -->
+  <rect x="23" y="13" width="9" height="8" rx="2" fill="#fa5238" stroke="#0f1f33" stroke-width="1.5"/>
+  <rect x="34" y="13" width="9" height="8" rx="2" fill="#fbbf24" stroke="#0f1f33" stroke-width="1.5"/>
+  
+  <!-- Middle row -->
+  <rect x="12" y="22" width="9" height="8" rx="2" fill="#10b981" stroke="#0f1f33" stroke-width="1.5"/>
+  <rect x="23" y="22" width="9" height="8" rx="2" fill="#38bdf8" stroke="#0f1f33" stroke-width="1.5"/>
+  <rect x="34" y="22" width="9" height="8" rx="2" fill="#a855f7" stroke="#0f1f33" stroke-width="1.5"/>
+  <rect x="45" y="22" width="8" height="8" rx="2" fill="#f43f5e" stroke="#0f1f33" stroke-width="1.5"/>
+  
+  <!-- Docker Whale Hull -->
+  <path d="M9 33C9 33 10.5 45 24 47C39 49 51 43 55 35C56 33 53 32 48 32H11C9.5 32 9 32.5 9 33Z" fill="#1d63ed" stroke="#ffffff" stroke-width="1.5"/>
+  
+  <!-- Whale Tail -->
+  <path d="M53 35C56 35 59 31 60 28C58 30 55.5 32 52 33V35Z" fill="#1d63ed" stroke="#ffffff" stroke-width="1"/>
+  
+  <!-- Whale Eye -->
+  <circle cx="16" cy="37" r="2" fill="#ffffff"/>
+  <circle cx="15.5" cy="36.8" r="1" fill="#0f1f33"/>
+  
+  <!-- Gentle Water Waves -->
+  <path d="M6 52C12 50 18 54 24 52C30 50 36 54 42 52C48 50 54 54 58 52" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

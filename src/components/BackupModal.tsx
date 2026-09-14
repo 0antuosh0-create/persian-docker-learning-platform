@@ -207,7 +207,7 @@ export function BackupModal({
               onClick={handleExport}
             >
               <Download size={16} aria-hidden="true" />
-              <span>دانلود فایل پشتیبان (.json)</span>
+              <span>دانلود فایل پشتیبان (json)</span>
             </button>
           </div>
 
