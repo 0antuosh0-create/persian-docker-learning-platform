@@ -17,13 +17,24 @@ export function Inline({ text }: { text: string }) {
   return (
     <>
       {parts.map((part, i) => {
-        if (part.startsWith("`") && part.endsWith("`"))
+        if (part.startsWith("`") && part.endsWith("`")) {
           return (
             <code key={i} dir="ltr" className="inline-code">
               {part.slice(1, -1)}
             </code>
           );
-        if (part.startsWith("**") && part.endsWith("**")) return <strong key={i}>{part.slice(2, -2)}</strong>;
+        }
+        if (part.startsWith("**") && part.endsWith("**")) {
+          const inner = part.slice(2, -2);
+          if (inner.startsWith("`") && inner.endsWith("`")) {
+            return (
+              <code key={i} dir="ltr" className="inline-code font-bold">
+                {inner.slice(1, -1)}
+              </code>
+            );
+          }
+          return <strong key={i}>{inner}</strong>;
+        }
         return <span key={i}>{part}</span>;
       })}
     </>
