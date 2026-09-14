@@ -1047,77 +1047,41 @@ button:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visib
 
 /* ═══════════ نوار فهرست گام‌ها (Outline Rail) ═══════════ */
 .player-layout {
-  max-width: 1180px; margin: 0 auto; padding: 0 20px;
-  display: grid; grid-template-columns: 210px minmax(0, 840px); gap: 36px; justify-content: center;
+  max-width: 1160px; margin: 0 auto; padding: 0 20px;
+  display: grid; grid-template-columns: 198px minmax(0, 820px); gap: 34px; justify-content: center;
   align-items: start;
-  position: relative;
 }
-.outline-rail {
-  position: sticky;
-  top: 144px;
-  align-self: start;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-.outline-rail::-webkit-scrollbar { display: none; }
-.outline-title {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 11.5px; font-weight: 900; color: var(--ink-soft);
-  letter-spacing: 0.3px; margin-bottom: 12px; padding-right: 6px;
-}
-.outline-counter {
-  font-size: 11px; font-weight: 800; color: var(--blue);
-  background: var(--sky); border-radius: 99px; padding: 1px 7px;
-  font-variant-numeric: tabular-nums;
-}
-.outline-rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; position: relative; }
-.outline-rail ol::before {
-  content: ""; position: absolute; top: 16px; bottom: 16px; right: 21px;
-  border-right: 2px dashed rgba(15, 31, 51, 0.16);
-}
+.outline-rail { position: sticky; top: 92px; padding-top: 36px; }
+.outline-title { font-size: 11px; font-weight: 900; color: var(--ink-soft); letter-spacing: 0.4px; margin-bottom: 10px; padding-right: 4px; }
+.outline-rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; position: relative; }
+.outline-rail ol::before { content: ""; position: absolute; top: 14px; bottom: 14px; right: 16px; border-right: 2px dashed var(--ink-faint); }
 .outline-item {
-  position: relative; width: 100%; display: flex; align-items: center; gap: 10px;
-  background: transparent; border: 1.5px solid transparent; border-radius: 10px; padding: 7px 8px;
-  font-size: 13px; font-weight: 700; color: var(--ink-soft); text-align: right;
-  cursor: pointer;
-  transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  position: relative; width: 100%; display: flex; align-items: center; gap: 9px;
+  background: transparent; border: 0; border-radius: 10px; padding: 7px 8px;
+  font-size: 12.5px; font-weight: 700; color: var(--ink-soft);
+  transition: background 0.18s, color 0.18s, transform 0.18s;
 }
-.outline-item:disabled { cursor: default; opacity: 0.5; }
+.outline-item:disabled { cursor: default; opacity: 0.55; }
 .outline-item:not(:disabled):hover { background: #fff; color: var(--ink); transform: translateX(-2px); }
 .outline-item .outline-icon {
   position: relative; z-index: 1; width: 26px; height: 26px; flex: 0 0 auto;
-  border-radius: 8px; border: 2px solid rgba(15, 31, 51, 0.18); background: #ffffff;
-  color: #64748b; display: grid; place-items: center;
-  box-shadow: 1px 1px 0 rgba(15, 31, 51, 0.1);
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 9px; border: 2px solid var(--ink-faint); background: var(--paper);
+  display: grid; place-items: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
-.outline-item.done .outline-icon {
-  background: var(--mint); border-color: var(--ink); color: #fff;
-  box-shadow: 1.5px 1.5px 0 var(--ink);
-}
-.outline-item.reading {
-  color: var(--ink); font-weight: 900;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 2.5px 2.5px 0 var(--ink);
-  border-color: var(--ink);
-  transform: translateX(-2px);
-}
-.outline-item.reading .outline-icon {
-  background: var(--ink); border-color: var(--ink); color: #fff;
-  transform: scale(1.08);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-}
+.outline-item.done .outline-icon { background: var(--mint); border-color: var(--ink); color: #fff; }
+.outline-item.current .outline-icon { background: var(--ink); border-color: var(--ink); color: #fff; }
+.outline-item.is-check .outline-icon { color: var(--violet); }
+.outline-item.is-check.current .outline-icon, .outline-item.is-check.done .outline-icon { color: #fff; }
+.outline-item.is-try .outline-icon { color: var(--mint); }
+.outline-item.is-try.current .outline-icon, .outline-item.is-try.done .outline-icon { color: #fff; }
+.outline-item.current { color: var(--ink); font-weight: 800; }
 .outline-item.recap .outline-icon { color: var(--sun); }
-.outline-item.recap.done .outline-icon,
-.outline-item.recap.reading .outline-icon {
-  background: var(--sun); color: var(--ink); border-color: var(--ink);
-}
+.outline-item.recap.done .outline-icon { background: var(--sun); color: var(--ink); }
 
 /* لنگر گام‌ها برای پرش نرم */
-.step-anchor { scroll-margin-top: 148px; display: flex; flex-direction: column; gap: 22px; }
+.step-anchor { scroll-margin-top: 132px; display: flex; flex-direction: column; gap: 22px; }
+.outline-rail { top: 140px; }
 /* ═══════════ ادیتور با شماره خط ═══════════ */
 .editor-shell { display: flex; align-items: stretch; }
 .editor-gutter {

@@ -341,29 +341,25 @@ export function LessonPlayer({
       <div className="player-layout">
         {/* فهرست گام‌های درس */}
         <aside className="outline-rail" aria-label="فهرست گام‌های درس">
-          <div className="outline-title">
-            <span>ساختار درس</span>
-            <span className="outline-counter">{fa(Math.min(activeReadingStep + 1, total))}/{fa(total)}</span>
-          </div>
+          <div className="outline-title">ساختار درس</div>
           <ol>
             {lesson.steps.map((step, i) => {
               const meta = STEP_META[step.kind];
               const Icon = meta.icon;
-              const isDone = finished || i < visible - 1;
-              const isReading = activeReadingStep === i && !finished;
-              const isTarget = i === currentIndex && !finished;
-              const isLocked = i >= visible && !finished;
-
+              const unlocked = finished || i < visible;
+              const done = finished || i < visible - 1;
+              const inView = activeReadingStep === i && unlocked && !finished;
+              const state = done ? "done" : inView ? "current" : "pending";
               return (
                 <li key={i}>
                   <button
-                    className={`outline-item ${isDone ? "done" : ""} ${isReading ? "reading" : ""} ${isTarget ? "current" : ""} ${isLocked ? "pending" : ""} ${step.kind === "try" ? "is-try" : ""} ${step.kind === "check" ? "is-check" : ""}`}
+                    className={`outline-item ${state} ${step.kind === "try" ? "is-try" : ""} ${step.kind === "check" ? "is-check" : ""}`}
                     onClick={() => jumpTo(i)}
-                    disabled={isLocked}
-                    title={`${meta.label}${isDone ? " (تکمیل شده)" : isReading ? " (در حال مطالعه)" : ""}`}
+                    disabled={!unlocked}
+                    title={inView ? `${meta.label} (در حال مطالعه)` : meta.label}
                   >
                     <span className="outline-icon">
-                      {isDone ? <CheckCircle2 size={14} /> : <Icon size={14} />}
+                      {done ? <CheckCircle2 size={14} /> : <Icon size={14} />}
                     </span>
                     <span className="outline-label">{meta.label}</span>
                   </button>
@@ -372,7 +368,7 @@ export function LessonPlayer({
             })}
             <li>
               <button
-                className={`outline-item recap ${finished ? "done" : activeReadingStep >= total ? "reading" : "pending"}`}
+                className={`outline-item recap ${finished ? "done" : "pending"}`}
                 disabled={!finished}
                 onClick={jumpToRecap}
                 title="جمع‌بندی درس"
